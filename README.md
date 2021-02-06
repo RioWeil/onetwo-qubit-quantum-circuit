@@ -16,6 +16,6 @@ A classical bit can take on two binary values, namely, 0 and 1.
 A quantum bit, or qubit is slightly different; it can be represented as a superposition of a 0 and 1 state.
 Mathematically, this is represented by:
 
-<img src="https://render.githubusercontent.com/render/math?math=\begin{pmatrix} \alpha \\ \beta \end{pmatrix}">
+<img src="https://render.githubusercontent.com/render/math?math=\begin{pmatrix} |\psi\rangle = \alpha|0\rangle + \beta |1\rangle">
  
 
