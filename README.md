@@ -12,10 +12,6 @@
 - I want to combine my interests in QM and computation, and get more people interested in physics.
 
 ## Brief Technical Overview
-A classical bit can take on two binary values, namely, 0 and 1. 
-A quantum bit, or qubit is slightly different; it can be represented as a superposition of a 0 and 1 state.
-Mathematically, this is represented by:
+See qcoverview.ipynb file.
 
-<img src="https://render.githubusercontent.com/render/math?math=\begin{pmatrix} |\psi\rangle">
- 
-
+## User Stories
