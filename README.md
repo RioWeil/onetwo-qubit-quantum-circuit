@@ -12,6 +12,10 @@
 - I want to combine my interests in QM and computation, and get more people interested in physics.
 
 ## Brief Technical Overview
-See qcoverview.ipynb file.
+See *qc_overview.pdf* file.
 
 ## User Stories
+- As a user, I want to be able to fully manipulate the 2-qubit system with Pauli-XYZ, S, T, Hadamard, and CNOT gates.
+- As a user, I want to be able to add and remove gates to a list of quantum gates that will operate on the system.
+- As a user, I want to be able to see the current quantum state of the qubits.
+- As a user, I want to be able to measure the qubits and see the probabilities of measurement outcomes.
