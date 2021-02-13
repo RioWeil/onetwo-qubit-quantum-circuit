@@ -19,13 +19,21 @@ public class TwoByOneVector {
     // REQUIRES: row is 0 or 1.
     // MODIFIES: this
     // EFFECTS: Sets vector at specified entry (0 based indexing) to be the specified complex number.
-    public void setMatrixElement(int row, Complex element) {
+    public void setVectorElement(int row, Complex element) {
         vector[row] = element;
     }
 
     // MODIFIES: this
     // EFFECTS: Matrix multiplies this.vector by the provided matrix, sets vector to result.
     public void multiplyMatrix(TwoByTwoMatrix matrix) {
-
+        Complex temp1;
+        Complex temp2;
+        Complex oldv0 = vector[0];
+        Complex oldv1 = vector[1];
+        for (int i = 0; i < 2; i++) {
+            temp1 = oldv0.complexMultiply(matrix.getMatrixElement(i, 0));
+            temp2 = oldv1.complexMultiply(matrix.getMatrixElement(i, 1));
+            vector[i] = temp1.complexAdd(temp2);
+        }
     }
 }
