@@ -1,5 +1,6 @@
 package model;
 
+// Represents a 4x4 matrix.
 public class FourByFourMatrix {
     protected Complex[][] matrix = new Complex[4][4];
 
@@ -26,6 +27,8 @@ public class FourByFourMatrix {
         matrix[row][col] = element;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Sets matrix to be the CNOT gate (entangles the two qubits in the system).
     public void setCnotGate() {
         matrix[0][0] = new Complex(1, 0);
         matrix[1][1] = new Complex(1, 0);

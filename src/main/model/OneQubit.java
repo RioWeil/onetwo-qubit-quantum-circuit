@@ -1,5 +1,6 @@
 package model;
 
+// Represents a single qubit (a linear combination of the |0> and |1> pure states).
 public class OneQubit extends TwoByOneVector {
 
     // REQUIRES: The sum of the squared moduli of a0, a1 must be 1, i.e. |a0|^2 + |a1|^2 = 1.
@@ -14,4 +15,24 @@ public class OneQubit extends TwoByOneVector {
     public void applyGate(TwoByTwoMatrix gate) {
         multiplyMatrix(gate);
     }
+
+    // REQUIRES: i must be either 0 or 1
+    // EFFECTS: Returns the complex amplitude of the 0 or 1 state of the qubit.
+    public double getAmplitude(int i) {
+
+    }
+
+    // REQUIRES: i must either be 0 or 1
+    // EFFECTS: Returns the probability of measuring the 0 or 1 state if one was to measure the qubit.
+    public double getProbability(int i) {
+
+    }
+
+    // REQUIRES: i must be either 0 or 1.
+    // MODIFIES: this
+    // EFFECTS: Sets the qubit to be either the pure 0 or 1 state.
+    public void collapseAfterMeasurement(int i) {
+
+    }
+
 }

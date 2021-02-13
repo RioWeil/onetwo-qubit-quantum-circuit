@@ -1,5 +1,6 @@
 package model;
 
+// Represents a system of two qubits (a linear combination of the |00>, |01>, |10>, and and |11> pure states).
 public class TwoQubit extends FourByOneVector {
 
     // REQUIRES: The sum of the squared moduli of a0, a1, a2, a3 must be 1, i.e. |a0|^2 + |a1|^2 + |a2|^2 + |a3|^2 = 1.
@@ -15,7 +16,5 @@ public class TwoQubit extends FourByOneVector {
         FourByFourMatrix combinedGates = m1.tensorProduct(m2);
         multiplyMatrix(combinedGates);
     }
-
-
 
 }

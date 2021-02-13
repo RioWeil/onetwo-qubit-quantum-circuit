@@ -1,5 +1,6 @@
 package model;
 
+// Represents a 4x1 column vector.
 public class FourByOneVector {
     protected Complex[] vector = new Complex[4];
 

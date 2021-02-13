@@ -1,5 +1,6 @@
 package model;
 
+// Represents a 2x1 column vector.
 public class TwoByOneVector {
     protected Complex[] vector = new Complex[2];
 
