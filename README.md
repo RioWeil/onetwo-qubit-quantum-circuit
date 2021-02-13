@@ -15,7 +15,9 @@
 See *qc_overview.pdf* file.
 
 ## User Stories
-- As a user, I want to be able to fully manipulate the 2-qubit system with Pauli-XYZ, S, T, Hadamard, and CNOT gates.
+- As a user, I want to be able to fully manipulate a 1-qubit system by applying Pauli-XYZ, S, T, and Hadamard gates.
+- As a user, I want to be able to fully manipulate a 2-qubit system by applying any tensor product of the above gates,
+  as well as apply a quantum CNOT gate. 
 - As a user, I want to be able to add and remove gates to a list of quantum gates that will operate on the system.
-- As a user, I want to be able to see the current quantum state of the qubits.
-- As a user, I want to be able to measure the qubits and see the probabilities of measurement outcomes.
+- As a user, I want to be able to view the current quantum state, see probability outcomes of measurement,
+  and measure the state.
