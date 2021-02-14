@@ -1,14 +1,11 @@
 package ui;
 
 import model.Complex;
-import model.OneQubit;
 import model.OneQubitQuantumCircuit;
 import model.TwoQubitQuantumCircuit;
 
-import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 // Quantum Circuit Simulation Application. Heavily based off of TellerApp.java
