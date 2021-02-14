@@ -28,48 +28,50 @@ public class OneQubitQuantumCircuit {
     // REQUIRES: gate is one of "X", "Y", "Z", "H", "T", "S", "I".
     // MODIFIES: this
     // EFFECTS: Adds a gate to gates.
-    public void addGate() {
+    public void addGate(String gate) {
 
     }
 
-    // EFFECTS: Produces the first gate in gates, or returns "no gates in list" if empty.
+    // EFFECTS: Produces the first gate in gates, or returns "No gates in list" if empty.
     public String seeFirstGate() {
-
+        return null;
     }
 
     // MODIFIES: this
-    // EFFECTS: Removes first gate from gates and returns "removed gate <Gate>", or "no gates to remove" if empty.
-    public void removeGate() {
-
+    // EFFECTS: Removes first gate from gates and returns "removed <> gate", or "No gates in list to remove" if empty.
+    public String removeGate() {
+        return null;
     }
 
     // MODIFIES: this
     // EFFECTS: Applies the first gate in list to the qubit, and removes the gate from gates.
-    public void applyGate() {
-
+    //          Returns "Applied <> gate", or if empty, does nothing and returns "No gates in list to apply."
+    public String applyGate() {
+        return null;
     }
 
     // MODIFIES: this
     // EFFECTS: Applies all gates in the list to the qubit, and clears gates to be empty.
-    public void applyAllGates() {
-
+    //          Returns "Applied all gates in list.", or if empty, does nothing and returns "No gates in list to apply."
+    public String applyAllGates() {
+        return null;
     }
 
     // EFFECTS: Returns current qubit state in the form x|0> + y|1>, x and y are amplitudes of the 0 and 1 states.
     public String returnState() {
-
+        return null;
     }
 
 
     // EFFECTS: Returns the probabilities of the measurement outcomes of |0> and |1> for the current qubit state.
     public String returnProbabilities() {
-
+        return null;
     }
 
     // MODIFIES: this
     // EFFECTS: Measures the qubit and collapses it to pure state |0> or |1>, and return report of measurement outcome.
     public String makeMeasurement() {
-
+        return null;
     }
 
 
