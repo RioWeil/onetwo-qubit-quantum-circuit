@@ -2,11 +2,16 @@ package ui;
 
 import java.util.Scanner;
 
-// Qubit Simulation Application
+// Quantum Circuit Simulation Application
 public class QuantumCircuitApp {
 
-    // EFFECTS: Runs the QubitSimulation Application
+    // EFFECTS: Runs the Quantum Circuit Application
     public QuantumCircuitApp() {
+        runQuantumCircuit();
+    }
+
+    private void runQuantumCircuit() {
 
     }
+
 }

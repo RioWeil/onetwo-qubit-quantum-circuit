@@ -3,10 +3,8 @@ package model;
 import java.util.Random;
 
 // Represents a quantum circuit of a Qubit, containing a qubit and the list of gates that will be applied to the qubit.
-public class OneQubitQuantumCircuit {
+public class OneQubitQuantumCircuit extends QuantumCircuit {
     OneQubit qubit;
-    Gates gates;
-    Random random;
 
     // REQUIRES: The sum of the squared moduli of a0, a1 must be 1, i.e. |a0|^2 + |a1|^2 = 1.
     // EFFECTS: Creates new simulation with qubit set to initial state, an empty list of gates, and randomized seed.
@@ -23,35 +21,6 @@ public class OneQubitQuantumCircuit {
         qubit = new OneQubit(a0, a1);
         gates = new Gates();
         random = new Random(seed);
-    }
-
-    // REQUIRES: gate is one of "X", "Y", "Z", "H", "T", "S", "I".
-    // MODIFIES: this
-    // EFFECTS: Adds a gate to gates, and returns "Added <> gate to list."
-    public String addGate(String gate) {
-        gates.addGate(gate);
-        return "Added " + gate + " gate to list.";
-    }
-
-    // EFFECTS: Produces the first gate in gates, or returns "No gates in list" if empty.
-    public String seeFirstGate() {
-        if (gates.isEmpty()) {
-            return "No gates in list.";
-        } else {
-            return "The next gate is " + gates.seeNextGate() + ".";
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: Removes first gate from gates and returns "Removed <> gate.", or "No gates in list to remove" if empty.
-    public String removeGate() {
-        if (gates.isEmpty()) {
-            return "No gates in list to remove.";
-        } else {
-            String nextgate = gates.seeNextGate();
-            gates.removeNextGate();
-            return "Removed " + nextgate + " gate.";
-        }
     }
 
     // MODIFIES: this
@@ -83,20 +52,6 @@ public class OneQubitQuantumCircuit {
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: Applies all gates in the list to the qubit, and clears gates to be empty.
-    //          Returns "Applied all gates in list.", or if empty, does nothing and returns "No gates in list to apply."
-    public String applyAllGates() {
-        if (gates.isEmpty()) {
-            return "No gates in list to apply.";
-        } else {
-            while (! gates.isEmpty()) {
-                applyGate();
-            }
-            return "Applied all gates in list.";
-        }
-    }
-
     // EFFECTS: Returns current qubit state in the form x|0> + y|1>, x and y are amplitudes of the 0 and 1 states.
     public String returnState() {
         double zeroreal = qubit.getAmplitude(0).getReal();
@@ -122,16 +77,6 @@ public class OneQubitQuantumCircuit {
         return "The measurement probabilities are " + zeroprobstr + " for |0>, " + oneprobstr  + " for |1>.";
     }
 
-    // EFFECTS: Produces string of the form "#.###" from double (or "-#.###" if negative).
-    // String formatting from https://stackoverflow.com/questions/153724/how-to-round-a-number-to-n-decimal-places-in-java
-    private String formatDoubleToString(double d) {
-        if (d == 0 || d == 1) {
-            return String.format("%.4g", d);
-        } else {
-            return String.format("%.3g", d);
-        }
-    }
-
     // MODIFIES: this
     // EFFECTS: Measures the qubit and collapses it to pure state |0> or |1>, and return report of measurement outcome.
     public String makeMeasurement() {
@@ -145,9 +90,5 @@ public class OneQubitQuantumCircuit {
             return "You measured the system to be in the |1> state!";
         }
     }
-
-
-
-
 
 }
