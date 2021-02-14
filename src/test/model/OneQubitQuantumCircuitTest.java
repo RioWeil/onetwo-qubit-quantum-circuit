@@ -192,20 +192,20 @@ public class OneQubitQuantumCircuitTest {
     }
 
     @Test
-    public void measurementPureZeroState() {
+    public void testMeasurementPureZeroState() {
         assertEquals("You measured the system to be in the |0> state!", qc1.makeMeasurement());
         assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>.", qc1.returnState());
     }
 
     @Test
-    public void measurementPureOneState() {
+    public void testMeasurementPureOneState() {
         qc2 = new OneQubitQuantumCircuit(zero, one);
         assertEquals("You measured the system to be in the |1> state!", qc2.makeMeasurement());
         assertEquals("The current state is (0.000 + 0.000i)|0> + (1.000 + 0.000i)|1>.", qc2.returnState());
     }
 
     @Test
-    public void measurementMixedState() {
+    public void testMeasurementMixedState() {
         Complex oneroottwo = new Complex(Math.pow(0.5, 0.5), 0);
         Random r = new Random();
         int seed = r.nextInt();

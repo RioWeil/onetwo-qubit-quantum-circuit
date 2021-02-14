@@ -32,6 +32,12 @@ public class TwoQubitQuantumCircuit extends QuantumCircuit {
         return null;
     }
 
+    // REQUIRES: gate is one of "X", "Y", "Z", "S", "T", "I", "H"
+    // EFFECTS: Returns 2x2 matrix corresponding to string, e.g. "X" returns Pauli X gate.
+    private TwoByTwoMatrix getMatrixFromString(String gate) {
+        return new TwoByTwoMatrix();
+    }
+
 
     // EFFECTS: Returns two-qubit state in form x|00> + y|01> + z|10> + w|11>, where the letters are the amplitudes.
     @Override
