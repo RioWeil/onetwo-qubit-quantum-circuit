@@ -28,7 +28,7 @@ public class TwoQubitQuantumCircuit extends QuantumCircuit {
     // EFFECTS: Applies the first gate in list to the qubit, and removes the gate from gates.
     //          Returns "Applied <> gate", or if empty, does nothing and returns "No gates in list to apply."
     @Override
-    protected String applyGate() {
+    public String applyGate() {
         if (gates.isEmpty()) {
             return "No gates in list to apply.";
         } else {
@@ -69,7 +69,7 @@ public class TwoQubitQuantumCircuit extends QuantumCircuit {
 
     // EFFECTS: Returns two-qubit state in form x|00> + y|01> + z|10> + w|11>, where the letters are the amplitudes.
     @Override
-    protected String returnState() {
+    public String returnState() {
         String zzrealstr = formatDoubleToString(qubits.getAmplitude(0).getReal());
         String zzimagstr = formatDoubleToString(qubits.getAmplitude(0).getImaginary());
         String zorealstr = formatDoubleToString(qubits.getAmplitude(1).getReal());
@@ -87,7 +87,7 @@ public class TwoQubitQuantumCircuit extends QuantumCircuit {
 
     // EFFECTS: Returns the probabilities of measurement of |00>, |01> , |10> , and |11> for current state of qubits.
     @Override
-    protected String returnProbabilities() {
+    public String returnProbabilities() {
         String zzprobstr = formatDoubleToString(qubits.getProbability(0));
         String zoprobstr = formatDoubleToString(qubits.getProbability(1));
         String ozprobstr = formatDoubleToString(qubits.getProbability(2));
@@ -101,7 +101,7 @@ public class TwoQubitQuantumCircuit extends QuantumCircuit {
     // EFFECTS: Measures qubits and collapses system to one of four pure states |00>, |01> , |10> , and |11>.
     //          Returns report of the measurement outcome.
     @Override
-    protected String makeMeasurement() {
+    public String makeMeasurement() {
         double randval = random.nextDouble();
         double zzprob = qubits.getProbability(0);
         double zoprob = qubits.getProbability(1);
