@@ -114,7 +114,7 @@ public class QuantumCircuitApp {
         System.out.println("\n5 - apply first quantum gate in list to qubit");
         System.out.println("\n6 - apply all quantum gates in list to qubit");
         System.out.println("\n7 - measure qubit");
-        System.out.println("\nq - Return to main menu; may have to press twice.");
+        System.out.println("\nq - Return to main menu");
     }
 
     // MODIFIES: this
@@ -184,7 +184,6 @@ public class QuantumCircuitApp {
         } else {
             System.out.println("\nInput is not valid!");
         }
-        controlOneQubitQuantumCircuit();
     }
 
 
