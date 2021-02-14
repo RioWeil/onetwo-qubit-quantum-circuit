@@ -15,7 +15,7 @@ public abstract class QuantumCircuit {
     }
 
     // EFFECTS: Produces the first gate in gates, or returns "No gates in list" if empty.
-    protected String seeFirstGate() {
+    public String seeFirstGate() {
         if (gates.isEmpty()) {
             return "No gates in list.";
         } else {
@@ -25,7 +25,7 @@ public abstract class QuantumCircuit {
 
     // MODIFIES: this
     // EFFECTS: Removes first gate from gates and returns "Removed <> gate.", or "No gates in list to remove" if empty.
-    protected String removeGate() {
+    public String removeGate() {
         if (gates.isEmpty()) {
             return "No gates in list to remove.";
         } else {
@@ -43,7 +43,7 @@ public abstract class QuantumCircuit {
     // MODIFIES: this
     // EFFECTS: Applies all gates in the list to the qubit, and clears gates to be empty.
     //          Returns "Applied all gates in list.", or if empty, does nothing and returns "No gates in list to apply."
-    protected String applyAllGates() {
+    public String applyAllGates() {
         if (gates.isEmpty()) {
             return "No gates in list to apply.";
         } else {

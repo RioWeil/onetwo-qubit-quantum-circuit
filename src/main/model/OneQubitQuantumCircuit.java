@@ -26,6 +26,7 @@ public class OneQubitQuantumCircuit extends QuantumCircuit {
     // MODIFIES: this
     // EFFECTS: Applies the first gate in list to the qubit, and removes the gate from gates.
     //          Returns "Applied <> gate", or if empty, does nothing and returns "No gates in list to apply."
+    @Override
     public String applyGate() {
         if (gates.isEmpty()) {
             return "No gates in list to apply.";
@@ -53,6 +54,7 @@ public class OneQubitQuantumCircuit extends QuantumCircuit {
     }
 
     // EFFECTS: Returns current qubit state in the form x|0> + y|1>, x and y are amplitudes of the 0 and 1 states.
+    @Override
     public String returnState() {
         double zeroreal = qubit.getAmplitude(0).getReal();
         double zeroimag = qubit.getAmplitude(0).getImaginary();
@@ -69,6 +71,7 @@ public class OneQubitQuantumCircuit extends QuantumCircuit {
 
 
     // EFFECTS: Returns the probabilities of the measurement outcomes of |0> and |1> for the current qubit state.
+    @Override
     public String returnProbabilities() {
         double zeroprob = qubit.getProbability(0);
         double oneprob = qubit.getProbability(1);
@@ -79,6 +82,7 @@ public class OneQubitQuantumCircuit extends QuantumCircuit {
 
     // MODIFIES: this
     // EFFECTS: Measures the qubit and collapses it to pure state |0> or |1>, and return report of measurement outcome.
+    @Override
     public String makeMeasurement() {
         double cutoff = random.nextDouble();
         double zeroprob = qubit.getProbability(0);
