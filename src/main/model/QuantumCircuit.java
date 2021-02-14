@@ -2,6 +2,7 @@ package model;
 
 import java.util.Random;
 
+// Represents a general quantum circuit.
 public abstract class QuantumCircuit {
     protected Gates gates;
     protected Random random;
