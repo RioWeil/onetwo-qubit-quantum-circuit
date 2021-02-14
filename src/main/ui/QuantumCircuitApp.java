@@ -98,13 +98,13 @@ public class QuantumCircuitApp {
     // EFFECTS: Processes user input for controlling the one qubit system.
     private void controlOneQubitQuantumCircuit() {
         String command;
-        oneQubitControlPanelOptions();
+        qubitControlPanelOptions();
         command = input.next();
         oneQubitControlPanelCommand(command);
     }
 
     // EFFECTS: Displays menu of possible actions on the one qubit quantum circuit.
-    private void oneQubitControlPanelOptions() {
+    private void qubitControlPanelOptions() {
         System.out.println("\nSelect From:");
         System.out.println("\n0 - view current qubit state");
         System.out.println("\n1 - get current qubit measurement probabilities");
@@ -139,12 +139,12 @@ public class QuantumCircuitApp {
         }  else if (! command.equals("q")) {
             System.out.println("\nInput is not valid!");
         }
-        returnToMenuOrQuit(command);
+        returnToMenuOrQuitOne(command);
     }
 
     // MODIFIES: this
-    // EFFECTS: If "q", returns to main menu. Else, go back to the quantum circuit control panel.
-    private void returnToMenuOrQuit(String command) {
+    // EFFECTS: If "q", returns to main menu. Else, go back to the one qubit quantum circuit control panel.
+    private void returnToMenuOrQuitOne(String command) {
         if (command.equals("q")) {
             System.out.println("\nReturning to main menu...");
         } else {
@@ -186,9 +186,8 @@ public class QuantumCircuitApp {
         }
     }
 
-
-
-
+    // MODIFIES: this
+    // EFFECTS: Processes user input for choosing initial two qubit quantum state.
     private void startTwoQubitQuantumCircuit() {
         String command;
         initialQubitStateSelectionMenuTwoQubits();
@@ -196,6 +195,7 @@ public class QuantumCircuitApp {
         processQubitStateSelectionCommandTwoQubits(command);
     }
 
+    // EFFECTS: Displays menu of possible initial two qubit states.
     private void initialQubitStateSelectionMenuTwoQubits() {
         System.out.println("\nSelect From:");
         System.out.println("\n0 -> Initial state of |00>");
@@ -204,19 +204,122 @@ public class QuantumCircuitApp {
         System.out.println("\n3 -> Initial state of |11>");
     }
 
+    // MODIFIES: this
+    // EFFECTS: Processes user command for choosing the initial two qubit quantum state.
     private void processQubitStateSelectionCommandTwoQubits(String command) {
+        Complex zero = new Complex(0, 0);
+        Complex one = new Complex(1, 0);
         if (command.equals("0")) {
-            System.out.println("This implementation not complete! Returning to Main menu.");
+            twoQubit = new TwoQubitQuantumCircuit(one, zero, zero, zero);
+            controlTwoQubitQuantumCircuit();
         } else if (command.equals("1")) {
-            System.out.println("This implementation not complete! Returning to Main menu.");
+            twoQubit = new TwoQubitQuantumCircuit(zero, one, zero, zero);
+            controlTwoQubitQuantumCircuit();
         } else if (command.equals("2")) {
-            System.out.println("This implementation not complete! Returning to Main menu.");
+            twoQubit = new TwoQubitQuantumCircuit(zero, zero, one, zero);
+            controlTwoQubitQuantumCircuit();
         } else if (command.equals("3")) {
-            System.out.println("This implementation not complete! Returning to Main menu.");
+            twoQubit = new TwoQubitQuantumCircuit(zero, zero, zero, one);
+            controlTwoQubitQuantumCircuit();
         } else {
             System.out.println("Input is not valid! Returning to Main menu.");
         }
     }
+
+    // MODIFIES: this
+    // EFFECTS: Processes user input for controlling the two qubit system.
+    private void controlTwoQubitQuantumCircuit() {
+        String command;
+        qubitControlPanelOptions();
+        command = input.next();
+        twoQubitControlPanelCommand(command);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Processes user command for actions on the one qubit quantum circuit.
+    private void twoQubitControlPanelCommand(String command) {
+        if (command.equals("0")) {
+            System.out.println("\n" + twoQubit.returnState());
+        } else if (command.equals("1")) {
+            System.out.println("\n" + twoQubit.returnProbabilities());
+        } else if (command.equals("2")) {
+            System.out.println("\n" + twoQubit.seeFirstGate());
+        } else if (command.equals("3")) {
+            System.out.println("\n" + twoQubit.removeGate());
+        } else if (command.equals("4")) {
+            twoQubitAddGateOne();
+        } else if (command.equals("5")) {
+            System.out.println("\n" + twoQubit.applyGate());
+        } else if (command.equals("6")) {
+            System.out.println("\n" + twoQubit.applyAllGates());
+        } else if (command.equals("7")) {
+            System.out.println("\n" + twoQubit.makeMeasurement());
+        }  else if (! command.equals("q")) {
+            System.out.println("\nInput is not valid!");
+        }
+        returnToMenuOrQuitTwo(command);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: If "q", returns to main menu. Else, go back to the two qubit quantum circuit control panel.
+    private void returnToMenuOrQuitTwo(String command) {
+        if (command.equals("q")) {
+            System.out.println("\nReturning to main menu...");
+        } else {
+            controlTwoQubitQuantumCircuit();
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Processes user input for adding first gate to 2-qubit quantum circuit
+    private void twoQubitAddGateOne() {
+        String command;
+        System.out.println("\nChoose the gate to act on the first qubit.");
+        oneQubitAddGateOptions();
+        System.out.println("\nc - CNOT/CN Gate (This acts on both qubits)");
+        command = input.next();
+        command = command.toUpperCase();
+        twoQubitAddGateOneCommand(command);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Processes user command for adding first gate to the 2-qubit quantum circuit.
+    private void twoQubitAddGateOneCommand(String command) {
+        String[] allowedLetters = {"X", "Y", "Z", "S", "T", "I", "H", "C"};
+        List<String> allowedLettersList = Arrays.asList(allowedLetters);
+        if (command.equals("C")) {
+            System.out.println("\n" + twoQubit.addGate("CN"));
+        } else if (allowedLettersList.contains(command)) {
+            twoQubitAddGateTwo(command);
+        } else {
+            System.out.println("\nInput is not valid!");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Processes user input for adding second gate to 2-qubit quantum circuit
+    private void twoQubitAddGateTwo(String gateone) {
+        String command;
+        System.out.println("\nChoose the gate to act on the second qubit.");
+        oneQubitAddGateOptions();
+        command = input.next();
+        command = command.toUpperCase();
+        twoQubitAddGateTwoCommand(gateone, command);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Processes user command for adding second gate to the 2-qubit quantum circuit.
+    private void twoQubitAddGateTwoCommand(String gateone, String command) {
+        String[] allowedLetters = {"X", "Y", "Z", "S", "T", "I", "H"};
+        List<String> allowedLettersList = Arrays.asList(allowedLetters);
+        if (allowedLettersList.contains(command)) {
+            String combinedgate = gateone + command;
+            System.out.println("\n" + twoQubit.addGate(combinedgate));
+        } else {
+            System.out.println("\nInput is not valid!");
+        }
+    }
+
 
 }
 
