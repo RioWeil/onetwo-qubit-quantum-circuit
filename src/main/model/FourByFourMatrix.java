@@ -33,6 +33,6 @@ public class FourByFourMatrix {
         matrix[0][0] = new Complex(1, 0);
         matrix[1][1] = new Complex(1, 0);
         matrix[2][3] = new Complex(1, 0);
-        matrix[3][2] = new Complex(0, 1);
+        matrix[3][2] = new Complex(1, 0);
     }
 }

@@ -9,17 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // Test Class for OneQubitQuantumCircuit
 public class OneQubitQuantumCircuitTest {
-    Complex zero;
-    Complex one;
-    Complex negoneroottwo;
-    Complex ioneroottwo;
+    Complex zero  = new Complex(0, 0);
+    Complex one = new Complex(1, 0);
     OneQubitQuantumCircuit qc1;
     OneQubitQuantumCircuit qc2;
 
     @BeforeEach
     public void runBefore() {
-        zero = new Complex(0, 0);
-        one = new Complex(1, 0);
         qc1 = new OneQubitQuantumCircuit(one, zero);
     }
 

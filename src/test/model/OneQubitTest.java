@@ -7,18 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // Test Class for OneQubit
 public class OneQubitTest {
-    Complex zero;
-    Complex one;
+    double delta = 0.0000001;
+    Complex zero = new Complex(0, 0);
+    Complex one = new Complex(1, 0);
     OneQubit q1;
     OneQubit q2;
     OneQubit q3;
     TwoByTwoMatrix matrix;
-    double delta = 0.0000001;
 
     @BeforeEach
     public void runBefore() {
-        zero = new Complex(0, 0);
-        one = new Complex(1, 0);
         q1 = new OneQubit(one, zero);
         q2 = new OneQubit(zero, one);
         q3 = new OneQubit(new Complex(-Math.pow(0.5, 0.5), 0), new Complex(0, Math.pow(0.5, 0.5)));

@@ -21,7 +21,7 @@ public abstract class FourByOneVector {
     // REQUIRES: row is an integer between 0 and 3.
     // MODIFIES: this
     // EFFECTS: Sets vector at specified entry (0 based indexing) to be the specified complex number.
-    protected void setMatrixElement(int row, Complex element) {
+    protected void setVectorElement(int row, Complex element) {
         vector[row] = element;
     }
 

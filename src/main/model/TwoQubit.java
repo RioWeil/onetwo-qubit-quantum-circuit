@@ -20,26 +20,36 @@ public class TwoQubit extends FourByOneVector {
     // MODIFIES: this
     // EFFECTS: Applies the CNOT gate to the two qubit system, entangling the two qubits.
     public void applyCnot() {
-        FourByFourMatrix matrix = new FourByFourMatrix();
-
+        FourByFourMatrix cnot = new FourByFourMatrix();
+        cnot.setCnotGate();
+        multiplyMatrix(cnot);
     }
 
     // REQUIRES: i must be either 0, 1, 2, or 3.
     // EFFECTS: Returns the complex amplitude of the 00, 01, 10, or 11 state of the Qubit.
     public Complex getAmplitude(int i) {
-        return new Complex(0, 0);
+        return getVectorElement(i);
     }
 
     // REQUIRES: i must be one of 0, 1, 2, or 3.
     // EFFECTS: Returns the probability of measuring the 00, 01, 10, or 11 state if one was to measure the qubit.
     public double getProbability(int i) {
-        return 0;
+        return Math.pow(getVectorElement(i).modulus(), 2);
     }
 
     // REQUIRES: i must be one of 0, 1, 2, or 3.
     // MODIFIES: this
     // EFFECTS: Sets the qubit to be either the pure 00, 01, 10, or 11 state.
     public void collapseAfterMeasurement(int i) {
+        Complex zero = new Complex(0, 0);
+        Complex one = new Complex(1, 0);
+        for (int j = 0; j < 4; j++) {
+            if (j == i) {
+                setVectorElement(j, one);
+            } else {
+                setVectorElement(j, zero);
+            }
+        }
 
     }
 
