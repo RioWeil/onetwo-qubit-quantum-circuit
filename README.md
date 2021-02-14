@@ -12,7 +12,9 @@
 - I want to combine my interests in QM and computation, and get more people interested in physics.
 
 ## Brief Technical Overview
-See *qc_overview.pdf* file.
+See *qc_overview.pdf* file. Note that the file is currently a work in progress. 
+In the meantime, chapters 1.1-2.2 of the qiskit textbook https://qiskit.org/textbook/ch-states/introduction.html
+contain the relevant background information.
 
 ## User Stories
 - As a user, I want to be able to fully manipulate a 1-qubit system by applying Pauli-XYZ, S, T, Identity, and Hadamard gates.
