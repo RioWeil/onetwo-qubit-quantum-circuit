@@ -29,26 +29,72 @@ public class TwoQubitQuantumCircuit extends QuantumCircuit {
     //          Returns "Applied <> gate", or if empty, does nothing and returns "No gates in list to apply."
     @Override
     protected String applyGate() {
-        return null;
+        if (gates.isEmpty()) {
+            return "No gates in list to apply.";
+        } else {
+            String gate = gates.getNextGate();
+            if (gate.equals("CN")) {
+                qubits.applyCnot();
+            } else {
+                String first = gate.substring(0, 1);
+                String second = gate.substring(1, 2);
+                qubits.applyGates(getMatrixFromString(first), getMatrixFromString(second));
+            }
+            return "Applied " + gate + " gate.";
+        }
     }
 
     // REQUIRES: gate is one of "X", "Y", "Z", "S", "T", "I", "H"
     // EFFECTS: Returns 2x2 matrix corresponding to string, e.g. "X" returns Pauli X gate.
     private TwoByTwoMatrix getMatrixFromString(String gate) {
-        return new TwoByTwoMatrix();
+        TwoByTwoMatrix matrix = new TwoByTwoMatrix();
+        if (gate.equals("X")) {
+            matrix.setPauliXGate();
+        } else if (gate.equals("Y")) {
+            matrix.setPauliYGate();
+        } else if (gate.equals("Z")) {
+            matrix.setPauliZGate();
+        } else if (gate.equals("S")) {
+            matrix.setSGate();
+        } else if (gate.equals("T")) {
+            matrix.setTGate();
+        } else if (gate.equals("I")) {
+            matrix.setIdentityGate();
+        } else {
+            matrix.setHadamardGate();
+        }
+        return matrix;
     }
 
 
     // EFFECTS: Returns two-qubit state in form x|00> + y|01> + z|10> + w|11>, where the letters are the amplitudes.
     @Override
     protected String returnState() {
-        return null;
+        String zzrealstr = formatDoubleToString(qubits.getAmplitude(0).getReal());
+        String zzimagstr = formatDoubleToString(qubits.getAmplitude(0).getImaginary());
+        String zorealstr = formatDoubleToString(qubits.getAmplitude(1).getReal());
+        String zoimagstr = formatDoubleToString(qubits.getAmplitude(1).getImaginary());
+        String ozrealstr = formatDoubleToString(qubits.getAmplitude(2).getReal());
+        String ozimagstr = formatDoubleToString(qubits.getAmplitude(2).getImaginary());
+        String oorealstr = formatDoubleToString(qubits.getAmplitude(3).getReal());
+        String ooimagstr = formatDoubleToString(qubits.getAmplitude(3).getImaginary());
+        String zzpart = "The current state is (" + zzrealstr + " + " + zzimagstr + "i)|00>";
+        String zopart = " + (" + zorealstr + " + " + zoimagstr + "i)|01>";
+        String ozpart = " + (" + ozrealstr + " + " + ozimagstr + "i)|10>";
+        String oopart = " + (" + oorealstr + " + " + ooimagstr + "i)|11>.";
+        return  zzpart + zopart + ozpart + oopart;
     }
 
     // EFFECTS: Returns the probabilities of measurement of |00>, |01> , |10> , and |11> for current state of qubits.
     @Override
     protected String returnProbabilities() {
-        return null;
+        String zzprobstr = formatDoubleToString(qubits.getProbability(0));
+        String zoprobstr = formatDoubleToString(qubits.getProbability(1));
+        String ozprobstr = formatDoubleToString(qubits.getProbability(2));
+        String ooprobstr = formatDoubleToString(qubits.getProbability(3));
+        String firstpart = "The measurement probabilities are " + zzprobstr + " for |00>, " + zoprobstr + " for |01>,";
+        String secondpart = " " + ozprobstr + " for |10>, " + ooprobstr + " for |11>.";
+        return firstpart + secondpart;
     }
 
     // MODIFIES: this
@@ -56,6 +102,22 @@ public class TwoQubitQuantumCircuit extends QuantumCircuit {
     //          Returns report of the measurement outcome.
     @Override
     protected String makeMeasurement() {
-        return null;
+        double randval = random.nextDouble();
+        double zzprob = qubits.getProbability(0);
+        double zoprob = qubits.getProbability(1);
+        double ozprob = qubits.getProbability(2);
+        if (randval < zzprob) {
+            qubits.collapseAfterMeasurement(0);
+            return "You measured the system to be in the |00> state!";
+        } else if (randval < zzprob + zoprob) {
+            qubits.collapseAfterMeasurement(1);
+            return "You measured the system to be in the |01> state!";
+        } else if (randval < zzprob + zoprob + ozprob) {
+            qubits.collapseAfterMeasurement(2);
+            return "You measured the system to be in the |10> state!";
+        } else {
+            qubits.collapseAfterMeasurement(3);
+            return "You measured the system to be in the |11> state!";
+        }
     }
 }

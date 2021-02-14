@@ -22,6 +22,11 @@ public class TwoQubitQuantumCircuitTest {
     }
 
     @Test
+    public void testApplyGateEmpty() {
+        assertEquals("No gates in list to apply.", qc1.applyGate());
+    }
+
+    @Test
     public void testApplyCnot() {
         qc1.addGate("CN");
         qc1.applyGate();
@@ -53,7 +58,7 @@ public class TwoQubitQuantumCircuitTest {
         qc1.addGate("YT");
         qc1.applyGate();
         part1 = "The current state is (0.000 + 0.000i)|00> + (0.000 + 0.000i)|01>";
-        part2 = " + (0.000 + -1.000i)|10> + (0.000 + 0.000i)|11>.";
+        part2 = " + (0.000 + 1.000i)|10> + (0.000 + 0.000i)|11>.";
         assertEquals(part1 + part2, qc1.returnState());
     }
 
@@ -106,8 +111,8 @@ public class TwoQubitQuantumCircuitTest {
     public void testReturnProbabilitiesMixedState() {
         Complex half = new Complex(0.5, 0);
         qc2 = new TwoQubitQuantumCircuit(half, half, half, half);
-        part1 = "The measurement probabilities are 0.500 for |00>, 0.500 for |01>, ";
-        part2 = "0.500 for |10>, 0.500 for |11>.";
+        part1 = "The measurement probabilities are 0.250 for |00>, 0.250 for |01>, ";
+        part2 = "0.250 for |10>, 0.250 for |11>.";
         assertEquals(part1 + part2, qc2.returnProbabilities());
     }
 
@@ -157,15 +162,15 @@ public class TwoQubitQuantumCircuitTest {
         double prob00 = qc2.qubits.getProbability(0);
         double prob01 = qc2.qubits.getProbability(1);
         double prob10 = qc2.qubits.getProbability(2);
-        if (0 < randval && randval < prob00) {
+        if (randval < prob00) {
             assertEquals("You measured the system to be in the |00> state!", qc2.makeMeasurement());
             part1 = "The current state is (1.000 + 0.000i)|00> + (0.000 + 0.000i)|01>";
             part2 = " + (0.000 + 0.000i)|10> + (0.000 + 0.000i)|11>.";
-        } else if (prob00 < randval && randval < prob00 + prob01) {
+        } else if (randval < prob00 + prob01) {
             assertEquals("You measured the system to be in the |01> state!", qc2.makeMeasurement());
             part1 = "The current state is (0.000 + 0.000i)|00> + (1.000 + 0.000i)|01>";
             part2 = " + (0.000 + 0.000i)|10> + (0.000 + 0.000i)|11>.";
-        } else if (prob00 + prob01 < randval && randval < prob00 + prob01 + prob10) {
+        } else if (randval < prob00 + prob01 + prob10) {
             assertEquals("You measured the system to be in the |10> state!", qc2.makeMeasurement());
             part1 = "The current state is (0.000 + 0.000i)|00> + (0.000 + 0.000i)|01>";
             part2 = " + (1.000 + 0.000i)|10> + (0.000 + 0.000i)|11>.";
