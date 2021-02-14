@@ -45,7 +45,7 @@ public class OneQubitQuantumCircuit extends QuantumCircuit {
                 matrix.setTGate();
             } else if (nextgate.equals("I")) {
                 matrix.setIdentityGate();
-            } else if (nextgate.equals("H")) {
+            } else {
                 matrix.setHadamardGate();
             }
             qubit.applyGate(matrix);
