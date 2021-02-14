@@ -118,8 +118,8 @@ public class OneQubitQuantumCircuitTest {
 
     @Test
     public void testApplyIdentityGate() {
-        qc1.addGate("T");
-        assertEquals("Applied T gate.", qc1.applyGate());
+        qc1.addGate("I");
+        assertEquals("Applied I gate.", qc1.applyGate());
         assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
