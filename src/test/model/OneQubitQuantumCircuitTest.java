@@ -25,9 +25,9 @@ public class OneQubitQuantumCircuitTest {
     @Test
     public void testaddGates() {
         assertTrue(qc1.gates.isEmpty());
-        qc1.addGate("X");
-        qc1.addGate("H");
-        qc1.addGate("Z");
+        assertEquals("Added X gate to list.", qc1.addGate("X"));
+        assertEquals("Added H gate to list.", qc1.addGate("H"));
+        assertEquals("Added Z gate to list.", qc1.addGate("Z"));
         assertEquals(3, qc1.gates.length());
     }
 
@@ -39,7 +39,7 @@ public class OneQubitQuantumCircuitTest {
     @Test
     public void testSeeFirstGateSingleton() {
         qc1.addGate("X");
-        assertEquals("X", qc1.seeFirstGate());
+        assertEquals("The next gate is X.", qc1.seeFirstGate());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class OneQubitQuantumCircuitTest {
         qc1.addGate("H");
         qc1.addGate("I");
         qc1.addGate("Y");
-        assertEquals("H", qc1.seeFirstGate());
+        assertEquals("The next gate is H.", qc1.seeFirstGate());
     }
 
     @Test
@@ -91,7 +91,7 @@ public class OneQubitQuantumCircuitTest {
     public void testApplyPauliYGate() {
         qc1.addGate("Y");
         assertEquals("Applied Y gate.", qc1.applyGate());
-        assertEquals("The current state is (0.000 + 0.000i|0> + (0.000 + 1.000i)|1>", qc1.returnState());
+        assertEquals("The current state is (0.000 + 0.000i)|0> + (0.000 + 1.000i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
 
@@ -99,7 +99,7 @@ public class OneQubitQuantumCircuitTest {
     public void testApplyPauliZGate() {
         qc1.addGate("Z");
         assertEquals("Applied Z gate.", qc1.applyGate());
-        assertEquals("The current state is (1.000 + 0.000i|0> + (0.000 + 0.000i)|1>", qc1.returnState());
+        assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
 
@@ -107,7 +107,7 @@ public class OneQubitQuantumCircuitTest {
     public void testApplySGate() {
         qc1.addGate("S");
         assertEquals("Applied S gate.", qc1.applyGate());
-        assertEquals("The current state is (1.000 + 0.000i|0> + (0.000 + 0.000i)|1>", qc1.returnState());
+        assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
 
@@ -115,15 +115,15 @@ public class OneQubitQuantumCircuitTest {
     public void testApplyTGate() {
         qc1.addGate("T");
         assertEquals("Applied T gate.", qc1.applyGate());
-        assertEquals("The current state is (1.000 + 0.000i|0> + (0.000 + 0.000i)|1>", qc1.returnState());
+        assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
 
     @Test
     public void testApplyIdentityGate() {
         qc1.addGate("T");
-        assertEquals("Applied I gate.", qc1.applyGate());
-        assertEquals("The current state is (1.000 + 0.000i|0> + (0.000 + 0.000i)|1>", qc1.returnState());
+        assertEquals("Applied T gate.", qc1.applyGate());
+        assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
 
@@ -131,7 +131,7 @@ public class OneQubitQuantumCircuitTest {
     public void testApplyHadamardGate() {
         qc1.addGate("H");
         assertEquals("Applied H gate.", qc1.applyGate());
-        assertEquals("The current state is (0.707 + 0.000i|0> + (0.707 + 0.000i)|1>", qc1.returnState());
+        assertEquals("The current state is (0.707 + 0.000i)|0> + (0.707 + 0.000i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
 
@@ -141,7 +141,7 @@ public class OneQubitQuantumCircuitTest {
         qc1.addGate("Y");
         assertEquals("Applied H gate.", qc1.applyGate());
         assertEquals("Applied Y gate.", qc1.applyGate());
-        assertEquals("The current state is (0.707 + -0.707i|0> + (0.000 + 0.707i)|1>", qc1.returnState());
+        assertEquals("The current state is (0.000 + -0.707i)|0> + (0.000 + 0.707i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
 
@@ -154,7 +154,7 @@ public class OneQubitQuantumCircuitTest {
     public void testApplyAllGatesOneGate() {
         qc1.addGate("H");
         assertEquals("Applied all gates in list.", qc1.applyAllGates());
-        assertEquals("The current state is (0.707 + 0.000i|0> + (0.707 + 0.000i)|1>", qc1.returnState());
+        assertEquals("The current state is (0.707 + 0.000i)|0> + (0.707 + 0.000i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
 
@@ -163,21 +163,21 @@ public class OneQubitQuantumCircuitTest {
         qc1.addGate("H");
         qc1.addGate("Y");
         assertEquals("Applied all gates in list.", qc1.applyAllGates());
-        assertEquals("The current state is (0.707 + -0.707i|0> + (0.000 + 0.707i)|1>", qc1.returnState());
+        assertEquals("The current state is (0.000 + -0.707i)|0> + (0.000 + 0.707i)|1>.", qc1.returnState());
         assertTrue(qc1.gates.isEmpty());
     }
 
     @Test
     public void testReturnStatePureStates() {
         qc2 = new OneQubitQuantumCircuit(zero, one);
-        assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>", qc1.returnState());
-        assertEquals("The current state is (0.000 + 0.000i)|0> + (1.000 + 0.000i)|1>", qc1.returnState());
+        assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>.", qc1.returnState());
+        assertEquals("The current state is (0.000 + 0.000i)|0> + (1.000 + 0.000i)|1>.", qc2.returnState());
     }
 
     @Test
     public void testReturnStateMixedStates() {
         qc2 = new OneQubitQuantumCircuit(new Complex(0.5, -0.5), new Complex (-Math.pow(0.5, 0.5), 0));
-        assertEquals("The current state is (0.500 + -0.500i)|0> + (-0.707 + 0.000i)|1>", qc2.returnState());
+        assertEquals("The current state is (0.500 + -0.500i)|0> + (-0.707 + 0.000i)|1>.", qc2.returnState());
     }
 
 
@@ -197,14 +197,14 @@ public class OneQubitQuantumCircuitTest {
     @Test
     public void measurementPureZeroState() {
         assertEquals("You measured the system to be in the |0> state!", qc1.makeMeasurement());
-        assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>", qc1.returnState());
+        assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>.", qc1.returnState());
     }
 
     @Test
     public void measurementPureOneState() {
         qc2 = new OneQubitQuantumCircuit(zero, one);
         assertEquals("You measured the system to be in the |1> state!", qc2.makeMeasurement());
-        assertEquals("The current state is (0.000 + 0.000i)|0> + (1.000 + 0.000i)|1>", qc2.returnState());
+        assertEquals("The current state is (0.000 + 0.000i)|0> + (1.000 + 0.000i)|1>.", qc2.returnState());
     }
 
     @Test
@@ -217,10 +217,10 @@ public class OneQubitQuantumCircuitTest {
         qc2 = new OneQubitQuantumCircuit(oneroottwo, oneroottwo, seed);
         if (randval < qc2.qubit.getProbability(0)) {
             assertEquals("You measured the system to be in the |0> state!", qc2.makeMeasurement());
-            assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>", qc2.returnState());
+            assertEquals("The current state is (1.000 + 0.000i)|0> + (0.000 + 0.000i)|1>.", qc2.returnState());
         } else {
             assertEquals("You measured the system to be in the |1> state!", qc2.makeMeasurement());
-            assertEquals("The current state is (0.000 + 0.000i)|0> + (1.000 + 0.000i)|1>", qc2.returnState());
+            assertEquals("The current state is (0.000 + 0.000i)|0> + (1.000 + 0.000i)|1>.", qc2.returnState());
         }
     }
 
