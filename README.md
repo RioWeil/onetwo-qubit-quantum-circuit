@@ -21,5 +21,5 @@ See *qc_overview.pdf* file.
 - As a user, I want to be able to add and/or remove multiple gates to a list of quantum gates that will operate on the system.
 - As a user, I want to be able to view the current quantum state, see probability outcomes of measurement,
   and measure the state.
-- As a user, I want to be able to save the current qubit state(s) for the 1/2 qubit circuits.
-- As a user, I want to be load in a qubit states from a file.
+- As a user, I want to be able to save the current qubit state(s) and list of quantum gates for the 1/2 qubit circuits.
+- As a user, I want to be load in a qubit states and list of quantum gates from a file.
