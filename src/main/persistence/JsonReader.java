@@ -123,7 +123,7 @@ public class JsonReader {
         JSONArray jsonArray = jsonObject.getJSONArray("gates");
         for (Object json: jsonArray) {
             JSONObject nextGate = (JSONObject) json;
-            addGate(qc, jsonObject);
+            addGate(qc, nextGate);
         }
     }
 
