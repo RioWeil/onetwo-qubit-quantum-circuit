@@ -1,0 +1,41 @@
+{
+  "numQubits" : 2,
+
+  "amplitudes" : [
+    {
+      "basisVector1": 0,
+      "basisVector2": 0,
+      "re": 0.5,
+      "im": 0
+    },
+    {
+      "basisVector1": 0,
+      "basisVector2": 1,
+      "re": 0.5,
+      "im": 0
+    },
+    {
+      "basisVector1": 1,
+      "basisVector2": 0,
+      "re": 0.5,
+      "im": 0
+    },
+    {
+      "basisVector1": 1,
+      "basisVector2": 1,
+      "re": 0.5,
+      "im": 0
+    }
+  ],
+
+  "gates" : [
+    {
+      "index": "0",
+      "gate": "XY"
+    },
+    {
+      "index": "1",
+      "gate": "CN"
+    }
+  ]
+}

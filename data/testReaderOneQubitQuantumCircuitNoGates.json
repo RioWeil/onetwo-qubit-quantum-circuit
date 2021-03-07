@@ -1,0 +1,18 @@
+{
+  "numQubits" : 1,
+
+  "amplitudes" : [
+    {
+      "basisVector": 0,
+      "re": 0,
+      "im": 0
+    },
+    {
+      "basisVector": 1,
+      "re": 0,
+      "im": 1
+    }
+  ],
+
+  "gates" : []
+}
