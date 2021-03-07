@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Citation: code obtained from JsonReader class in JsonSerializationDemo
+// Citation: code obtained from JsonReaderTest class in JsonSerializationDemo
 //           URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonReaderTest {
     OneQubitQuantumCircuit qc1;
