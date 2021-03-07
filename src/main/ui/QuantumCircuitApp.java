@@ -1,9 +1,13 @@
 package ui;
 
+import exceptions.WrongQubitNumberException;
 import model.Complex;
 import model.OneQubitQuantumCircuit;
 import model.TwoQubitQuantumCircuit;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +17,8 @@ public class QuantumCircuitApp {
     private OneQubitQuantumCircuit oneQubit;
     private TwoQubitQuantumCircuit twoQubit;
     private Scanner input;
+    final String relPath = "./data/";
+    final String extension = ".json";
 
     // EFFECTS: Runs the Quantum Circuit Application
     public QuantumCircuitApp() {
@@ -114,6 +120,8 @@ public class QuantumCircuitApp {
         System.out.println("\n5 - apply first quantum gate in list to qubit");
         System.out.println("\n6 - apply all quantum gates in list to qubit");
         System.out.println("\n7 - measure qubit");
+        System.out.println("\n8 - save current qubit state and list of gates to JSON file");
+        System.out.println("\n9 - load qubit state and list of gates from JSON file");
         System.out.println("\nq - Return to main menu");
     }
 
@@ -136,7 +144,9 @@ public class QuantumCircuitApp {
             System.out.println("\n" + oneQubit.applyAllGates());
         } else if (command.equals("7")) {
             System.out.println("\n" + oneQubit.makeMeasurement());
-        }  else if (! command.equals("q")) {
+        } else if (command.equals("8") || command.equals("9")) {
+            oneQubitSaveOrLoad(command);
+        } else if (! command.equals("q")) {
             System.out.println("\nInput is not valid!");
         }
         returnToMenuOrQuitOne(command);
@@ -184,6 +194,60 @@ public class QuantumCircuitApp {
         } else {
             System.out.println("\nInput is not valid!");
         }
+    }
+
+    // REQUIRES: command is "8" or "9"
+    // EFFECTS: Either goes into saving or loading procedure for one qubit depending on whether 8 or 9 was entered.
+    private void oneQubitSaveOrLoad(String command) {
+        if (command.equals("8")) {
+            oneQubitSave();
+        } else {
+            oneQubitLoad();
+        }
+    }
+
+    // EFFECTS: Procceses user input for saving the current one-qubit to a JSON file.
+    private void oneQubitSave() {
+        String command;
+        System.out.println("\nEnter filename to save current state as:");
+        command = input.next();
+        oneQubitSaveCommand(command);
+    }
+
+    // EFFECTS: Proccesses user command for saving the current one-qubit state to a JSON file.
+    private void oneQubitSaveCommand(String filename) {
+        try {
+            JsonWriter writer = new JsonWriter(relPath + filename + extension);
+            writer.open();
+            writer.write(oneQubit);
+            writer.close();
+            System.out.println(filename + extension + " saved successfully.");
+        } catch (IOException e) {
+            System.out.println("\nInvalid filename. Aborting save procedure and returing to qubit control menu.");
+        }
+    }
+
+    // EFFECTS: Processes user input for loading a one-qubit state from a JSON file.
+    private void oneQubitLoad() {
+        String command;
+        System.out.println("\nEnter filename to load the quantum state from:");
+        command = input.next();
+        oneQubitLoadCommand(command);
+    }
+
+    // EFFECTS: Processes user command for loading a one-qubit state from a JSON file.
+    private void oneQubitLoadCommand(String filename) {
+        String abort = " Aborting load procedure and returning to qubit control menu.";
+        try {
+            JsonReader reader = new JsonReader(relPath + filename + extension);
+            oneQubit = reader.readOne();
+            System.out.println(filename + extension + " was loaded in successfully.");
+        } catch (IOException e) {
+            System.out.println("File could not be found." + abort);
+        } catch (WrongQubitNumberException e) {
+            System.out.println("File is for 2-qubit system." + abort);
+        }
+
     }
 
     // MODIFIES: this
@@ -254,7 +318,9 @@ public class QuantumCircuitApp {
             System.out.println("\n" + twoQubit.applyAllGates());
         } else if (command.equals("7")) {
             System.out.println("\n" + twoQubit.makeMeasurement());
-        }  else if (! command.equals("q")) {
+        } else if (command.equals("8") || command.equals("9")) {
+            twoQubitSaveOrLoad(command);
+        } else if (! command.equals("q")) {
             System.out.println("\nInput is not valid!");
         }
         returnToMenuOrQuitTwo(command);
@@ -318,6 +384,60 @@ public class QuantumCircuitApp {
         } else {
             System.out.println("\nInput is not valid!");
         }
+    }
+
+    // REQUIRES: command is "8" or "9"
+    // EFFECTS: Either goes into saving or loading procedure for two qubits depending on whether 8 or 9 was entered.
+    private void twoQubitSaveOrLoad(String command) {
+        if (command.equals("8")) {
+            twoQubitSave();
+        } else {
+            twoQubitLoad();
+        }
+    }
+
+    // EFFECTS: Procceses user input for saving the current two-qubit to a JSON file.
+    private void twoQubitSave() {
+        String command;
+        System.out.println("\nEnter filename to save current state as:");
+        command = input.next();
+        twoQubitSaveCommand(command);
+    }
+
+    // EFFECTS: Proccesses user command for saving the current two-qubit state to a JSON file.
+    private void twoQubitSaveCommand(String filename) {
+        try {
+            JsonWriter writer = new JsonWriter(relPath + filename + extension);
+            writer.open();
+            writer.write(twoQubit);
+            writer.close();
+            System.out.println(filename + extension + " saved successfully.");
+        } catch (IOException e) {
+            System.out.println("\nInvalid filename. Aborting save procedure and returing to qubit control menu.");
+        }
+    }
+
+    // EFFECTS: Processes user input for loading a two-qubit state from a JSON file.
+    private void twoQubitLoad() {
+        String command;
+        System.out.println("\nEnter filename to load the quantum state from:");
+        command = input.next();
+        twoQubitLoadCommand(command);
+    }
+
+    // EFFECTS: Processes user command for loading a two-qubit state from a JSON file.
+    private void twoQubitLoadCommand(String filename) {
+        String abort = " Aborting load procedure and returning to qubit control menu.";
+        try {
+            JsonReader reader = new JsonReader(relPath + filename + extension);
+            twoQubit = reader.readTwo();
+            System.out.println(filename + extension + " was loaded in successfully.");
+        } catch (IOException e) {
+            System.out.println("File could not be found." + abort);
+        } catch (WrongQubitNumberException e) {
+            System.out.println("File is for 1-qubit system." + abort);
+        }
+
     }
 
 

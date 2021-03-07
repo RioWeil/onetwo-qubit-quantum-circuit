@@ -1,5 +1,4 @@
 {
-    "gates": [],
     "amplitudes": [
         {
             "re": 0,
@@ -12,5 +11,6 @@
             "basisVector": 1
         }
     ],
+    "gates": [],
     "numQubits": 1
 }

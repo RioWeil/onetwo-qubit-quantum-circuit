@@ -1,8 +1,8 @@
 {
     "amplitudes": [
         {
-            "re": 0,
-            "im": 1,
+            "re": 0.7071067811865476,
+            "im": 0,
             "basisVector1": 0,
             "basisVector2": 0
         },
@@ -19,7 +19,7 @@
             "basisVector2": 0
         },
         {
-            "re": 0,
+            "re": 0.7071067811865476,
             "im": 0,
             "basisVector1": 1,
             "basisVector2": 1

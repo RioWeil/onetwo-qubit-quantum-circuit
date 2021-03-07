@@ -1,14 +1,4 @@
 {
-    "gates": [
-        {
-            "index": 0,
-            "gate": "XY"
-        },
-        {
-            "index": 1,
-            "gate": "CN"
-        }
-    ],
     "amplitudes": [
         {
             "re": 0.5,
@@ -33,6 +23,16 @@
             "im": 0,
             "basisVector1": 1,
             "basisVector2": 1
+        }
+    ],
+    "gates": [
+        {
+            "index": 0,
+            "gate": "XY"
+        },
+        {
+            "index": 1,
+            "gate": "CN"
         }
     ],
     "numQubits": 2
