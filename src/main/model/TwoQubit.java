@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 // Represents a system of two qubits (a linear combination of the |00>, |01>, |10>, and and |11> pure states).
 public class TwoQubit extends FourByOneVector {
 
@@ -53,4 +56,23 @@ public class TwoQubit extends FourByOneVector {
 
     }
 
+    // EFFECTS: Produces JSONArray of Two-Qubit Amplitudes
+    public JSONArray amplitudesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        JSONObject json;
+        int counter = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                json = new JSONObject();
+                json.put("basisVector1", i);
+                json.put("basisVector2", j);
+                json.put("re", getVectorElement(counter).getReal());
+                json.put("im", getVectorElement(counter).getImaginary());
+                jsonArray.put(json);
+                counter++;
+            }
+
+        }
+        return jsonArray;
+    }
 }

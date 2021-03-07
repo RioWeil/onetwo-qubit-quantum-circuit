@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.LinkedList;
 
 // Represents a list of gates to be applied to the quantum state, that the user can add/remove gates from.
@@ -47,6 +50,16 @@ public class Gates {
         return gatelist.size();
     }
 
-
-
+    // EFFECTS: Produces JSONArray containing all current gates and their positions in the list.
+    public JSONArray gatesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        JSONObject json;
+        for (int i = 0; i < length(); i++) {
+            json = new JSONObject();
+            json.put("index", i);
+            json.put("gate", gatelist.get(i));
+            jsonArray.put(json);
+        }
+        return jsonArray;
+    }
 }

@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Random;
 
 // Represents a quantum circuit of two Qubits, containing 2 qubits and list of gates that will be applied to the qubits.
@@ -119,5 +122,21 @@ public class TwoQubitQuantumCircuit extends QuantumCircuit {
             qubits.collapseAfterMeasurement(3);
             return "You measured the system to be in the |11> state!";
         }
+    }
+
+    // EFFECTS: Produces a JSONObject corresponding to the current Quantum Circuit
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("gates", gatesToJson());
+        json.put("amplitudes", amplitudesToJson());
+        json.put("numQubits", 2);
+        return json;
+    }
+
+    // EFFECTS: Produces a JSONArray containing amplitudes of the two-qubit eigenstates.
+    @Override
+    protected JSONArray amplitudesToJson() {
+        return qubits.amplitudesToJson();
     }
 }

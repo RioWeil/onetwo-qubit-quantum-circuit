@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.Random;
 
 // Represents a general quantum circuit.
-public abstract class QuantumCircuit {
+public abstract class QuantumCircuit implements Writable {
     protected Gates gates;
     protected Random random;
 
@@ -74,5 +78,13 @@ public abstract class QuantumCircuit {
             return String.format("%.3g", d);
         }
     }
+
+    // EFFECTS: Produces a JSONArray containing current gates in list with their positions.
+    protected JSONArray gatesToJson() {
+        return gates.gatesToJson();
+    }
+
+    // EFFECTS: Produces a JSONArray containing amplitudes of qubit system eigenstates.
+    protected abstract JSONArray amplitudesToJson();
 
 }

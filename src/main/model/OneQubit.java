@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 // Represents a single qubit (a linear combination of the |0> and |1> pure states).
 public class OneQubit extends TwoByOneVector {
 
@@ -39,6 +42,20 @@ public class OneQubit extends TwoByOneVector {
             setVectorElement(0, new Complex(0, 0));
             setVectorElement(1, new Complex(1, 0));
         }
+    }
+
+    // EFFECTS: Produces JSONArray of One-Qubit Amplitudes
+    public JSONArray amplitudesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        JSONObject json;
+        for (int i = 0; i < 2; i++) {
+            json = new JSONObject();
+            json.put("basisVector", i);
+            json.put("re", getVectorElement(i).getReal());
+            json.put("im", getVectorElement(i).getImaginary());
+            jsonArray.put(json);
+        }
+        return jsonArray;
     }
 
 }

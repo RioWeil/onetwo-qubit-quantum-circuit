@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Random;
 
 // Represents a quantum circuit of a Qubit, containing a qubit and the list of gates that will be applied to the qubit.
@@ -95,4 +98,19 @@ public class OneQubitQuantumCircuit extends QuantumCircuit {
         }
     }
 
+    // EFFECTS: Produces a JSONObject corresponding to the current Quantum Circuit
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("gates", gatesToJson());
+        json.put("amplitudes", amplitudesToJson());
+        json.put("numQubits", 1);
+        return json;
+    }
+
+    // EFFECTS: Produces a JSONArray containing amplitudes of the single qubit eigenstates.
+    @Override
+    protected JSONArray amplitudesToJson() {
+        return qubit.amplitudesToJson();
+    }
 }

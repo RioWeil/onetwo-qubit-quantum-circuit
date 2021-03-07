@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // Citation: code obtained from JsonReaderTest class in JsonSerializationDemo
 //           URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+// Test Class for JsonReader
 public class JsonReaderTest {
     OneQubitQuantumCircuit qc1;
     TwoQubitQuantumCircuit qc2;
