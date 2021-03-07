@@ -102,9 +102,9 @@ public class OneQubitQuantumCircuit extends QuantumCircuit {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("gates", gatesToJson());
-        json.put("amplitudes", amplitudesToJson());
         json.put("numQubits", 1);
+        json.put("amplitudes", amplitudesToJson());
+        json.put("gates", gatesToJson());
         return json;
     }
 

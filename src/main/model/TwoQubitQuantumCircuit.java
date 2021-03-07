@@ -128,9 +128,9 @@ public class TwoQubitQuantumCircuit extends QuantumCircuit {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("gates", gatesToJson());
-        json.put("amplitudes", amplitudesToJson());
         json.put("numQubits", 2);
+        json.put("amplitudes", amplitudesToJson());
+        json.put("gates", gatesToJson());
         return json;
     }
 
