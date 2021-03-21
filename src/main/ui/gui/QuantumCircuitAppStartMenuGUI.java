@@ -8,13 +8,6 @@ import java.awt.event.ActionListener;
 
 // Represents a graphical start menu for the Quantum Circuit App
 public class QuantumCircuitAppStartMenuGUI extends JFrame {
-    private QuantumCircuitAppOneQubitGUI oneQubitGUI;
-    private QuantumCircuitAppTwoQubitGUI twoQubitGUI;
-    private JLabel welcomeLabel;
-    private JPanel imagePanel;
-    private ImageIcon qubitImage;
-    private JLabel qubitImageAsLabel;
-    private JPanel choicePanel;
     private String[] qubitPureStates = { "Start a 1-Qubit circuit with...", "|0>", "|1>",
             "Start a 2-Qubit circuit with...", "|00>", "|01>", "|10>", "|11>"};
 
@@ -24,7 +17,7 @@ public class QuantumCircuitAppStartMenuGUI extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        welcomeLabel = new JLabel("Welcome! Choose a circuit type and starting state.", (int) CENTER_ALIGNMENT);
+        JLabel welcomeLabel = new JLabel("Welcome! Choose a circuit type and starting state.", (int) CENTER_ALIGNMENT);
         add(welcomeLabel, BorderLayout.NORTH);
 
         setQubitImage();
@@ -35,12 +28,15 @@ public class QuantumCircuitAppStartMenuGUI extends JFrame {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates and adds an image of a qubit to the menu screen.
     private void setQubitImage() {
-        imagePanel = new JPanel();
+        JPanel imagePanel = new JPanel();
         add(imagePanel, BorderLayout.CENTER);
         String sep = System.getProperty("file.separator");
+        ImageIcon qubitImage;
         qubitImage = new ImageIcon(System.getProperty("user.dir") + sep + "data" + sep + "images" + sep + "qubit.png");
-        qubitImageAsLabel = new JLabel(qubitImage);
+        JLabel qubitImageAsLabel = new JLabel(qubitImage);
         imagePanel.add(qubitImageAsLabel);
     }
 
@@ -59,18 +55,10 @@ public class QuantumCircuitAppStartMenuGUI extends JFrame {
 
     // EFFECTS: Starts a new QuantumCircuitApp depending on the choice made.
     public void startCircuit(String startChoice) {
-        if (startChoice.equals("|0>")) {
-            oneQubitGUI = new QuantumCircuitAppOneQubitGUI();
-        } else if (startChoice.equals("|1>")) {
-            oneQubitGUI = new QuantumCircuitAppOneQubitGUI();
-        } else if (startChoice.equals("|00>")) {
-            twoQubitGUI = new QuantumCircuitAppTwoQubitGUI();
-        } else if (startChoice.equals("|01>")) {
-            twoQubitGUI = new QuantumCircuitAppTwoQubitGUI();
-        } else if (startChoice.equals("|10>")) {
-            twoQubitGUI = new QuantumCircuitAppTwoQubitGUI();
-        } else if (startChoice.equals("|11>")) {
-            twoQubitGUI = new QuantumCircuitAppTwoQubitGUI();
+        if (startChoice.length() == 3) { // "|0>" or "|1">
+            new QuantumCircuitAppOneQubitGUI(startChoice);
+        } else if (startChoice.length() == 4) { // "|00>" or "|01>" or "|10>" or "|11>"
+            new QuantumCircuitAppTwoQubitGUI(startChoice);
         }
     }
 
