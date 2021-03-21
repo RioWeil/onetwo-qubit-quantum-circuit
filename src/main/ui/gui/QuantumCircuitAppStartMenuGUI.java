@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 // Represents a graphical start menu for the Quantum Circuit App
 public class QuantumCircuitAppStartMenuGUI extends JFrame {
-    private String[] qubitPureStates = { "Start a 1-Qubit circuit with...", "|0>", "|1>",
+    private final String[] qubitPureStates = { "Start a 1-Qubit circuit with...", "|0>", "|1>",
             "Start a 2-Qubit circuit with...", "|00>", "|01>", "|10>", "|11>"};
 
     // EFFECTS: Creates a new start menu for the Quantum Circuit app.

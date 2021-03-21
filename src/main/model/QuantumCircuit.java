@@ -43,7 +43,7 @@ public abstract class QuantumCircuit implements Writable {
     // MODIFIES: this
     // EFFECTS: Applies the first gate in list to the qubit, and removes the gate from gates.
     //          Returns "Applied <> gate", or if empty, does nothing and returns "No gates in list to apply."
-    protected abstract String applyGate();
+    public abstract String applyGate();
 
     // MODIFIES: this
     // EFFECTS: Applies all gates in the list to the qubit, and clears gates to be empty.
@@ -60,14 +60,14 @@ public abstract class QuantumCircuit implements Writable {
     }
 
     // EFFECTS: Returns description of current qubit state as a string.
-    protected abstract String returnState();
+    public abstract String returnState();
 
     // EFFECTS: Returns description of probabilities of the different measurement outcomes of the current qubit system.
-    protected abstract String returnProbabilities();
+    public abstract String returnProbabilities();
 
     // MODIFIES: this
     // EFFECTS: Measures the qubit system and collapses it to a pure state. Returns a report of the measurement outcome.
-    protected abstract String makeMeasurement();
+    public abstract String makeMeasurement();
 
     // EFFECTS: Produces string of the form "#.###" from double (or "-#.###" if negative).
     // String formatting from https://stackoverflow.com/questions/153724/how-to-round-a-number-to-n-decimal-places-in-java
