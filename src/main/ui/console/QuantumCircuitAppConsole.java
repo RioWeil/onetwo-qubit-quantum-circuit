@@ -1,4 +1,4 @@
-package ui;
+package ui.console;
 
 import exceptions.WrongQubitNumberException;
 import model.Complex;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 // Quantum Circuit Simulation Application. Heavily based off of TellerApp.java
-public class QuantumCircuitApp {
+public class QuantumCircuitAppConsole {
     private OneQubitQuantumCircuit oneQubit;
     private TwoQubitQuantumCircuit twoQubit;
     private Scanner input;
@@ -21,7 +21,7 @@ public class QuantumCircuitApp {
     final String extension = ".json";
 
     // EFFECTS: Runs the Quantum Circuit Application
-    public QuantumCircuitApp() {
+    public QuantumCircuitAppConsole() {
         runQuantumCircuit();
     }
 
