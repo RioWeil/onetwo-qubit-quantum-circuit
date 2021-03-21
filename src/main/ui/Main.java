@@ -1,10 +1,9 @@
 package ui;
 
-
-import ui.console.QuantumCircuitAppConsole;
+import ui.gui.QuantumCircuitAppStartMenuGUI;
 
 public class Main {
     public static void main(String[] args) {
-        new QuantumCircuitAppConsole();
+        new QuantumCircuitAppStartMenuGUI();
     }
 }

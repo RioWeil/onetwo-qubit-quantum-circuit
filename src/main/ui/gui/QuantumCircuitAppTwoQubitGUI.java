@@ -13,7 +13,7 @@ public class QuantumCircuitAppTwoQubitGUI extends JFrame {
     // EFFECTS: Creates a new OneQubit Quantum Circuit GUI
     public QuantumCircuitAppTwoQubitGUI(String initialState) {
         super("Two Qubit Quantum Circuit Simulation");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         pack();
         setVisible(true);
     }

@@ -1,12 +1,16 @@
 package ui.gui;
 
+import exceptions.WrongQubitNumberException;
 import model.Complex;
 import model.OneQubitQuantumCircuit;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class QuantumCircuitAppOneQubitGUI extends JFrame {
     public static final int WIDTH = 1000;
@@ -17,19 +21,22 @@ public class QuantumCircuitAppOneQubitGUI extends JFrame {
     private JLabel statusLabel;
     private JLabel qubitStateLabel;
     private JLabel probabilitiesLabel;
-    private FlowLayout layout;
+    private GridLayout layout;
+    final String relPath = "./data/";
+    final String extension = ".json";
 
     // EFFECTS: Creates a new OneQubit Quantum Circuit GUI
     public QuantumCircuitAppOneQubitGUI(String initialState) {
         super("One Qubit Quantum Circuit Simulation");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        layout = new FlowLayout();
+        layout = new GridLayout(0,1);
         this.setLayout(layout);
         initializeCircuit(initialState);
         addLabels();
         addButtons();
-        this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        addSaveTextField();
+        addLoadTextField();
         pack();
         setVisible(true);
     }
@@ -174,6 +181,49 @@ public class QuantumCircuitAppOneQubitGUI extends JFrame {
             }
         });
         add(measureButton);
+    }
+
+    private void addSaveTextField() {
+        JTextField saveStateTextField = new JTextField("Save current qubit state as _.json");
+        saveStateTextField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String filename = (String) saveStateTextField.getText();
+                try {
+                    JsonWriter writer = new JsonWriter(relPath + filename + extension);
+                    writer.open();
+                    writer.write(oneQubit);
+                    writer.close();
+                    statusLabel.setText(filename + extension + " saved successfully.");
+                } catch (IOException ex) {
+                    statusLabel.setText("Invalid filename. Qubit state could not be saved.");
+                }
+            }
+        });
+        add(saveStateTextField);
+    }
+
+    private void addLoadTextField() {
+        JTextField loadStateTextField = new JTextField("Load qubit state from _.json");
+        loadStateTextField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String filename = (String) loadStateTextField.getText();
+                String abort = "Could not load qubit state from file.";
+                try {
+                    JsonReader reader = new JsonReader(relPath + filename + extension);
+                    oneQubit = reader.readOne();
+                    statusLabel.setText(filename + extension + " was loaded in successfully.");
+                    String updatedQubitStateString = oneQubit.returnState();
+                    qubitStateLabel.setText(updatedQubitStateString);
+                    String updatedProbabilitiesString = oneQubit.returnProbabilities();
+                    probabilitiesLabel.setText(updatedProbabilitiesString);
+                } catch (IOException ex) {
+                    statusLabel.setText("File could not be found." + abort);
+                } catch (WrongQubitNumberException ex) {
+                    statusLabel.setText("File is for 2-qubit system." + abort);
+                }
+            }
+        });
+        add(loadStateTextField);
     }
 
 

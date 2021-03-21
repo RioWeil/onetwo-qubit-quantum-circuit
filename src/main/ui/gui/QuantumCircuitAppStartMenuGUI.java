@@ -13,7 +13,7 @@ public class QuantumCircuitAppStartMenuGUI extends JFrame {
 
     // EFFECTS: Creates a new start menu for the Quantum Circuit app.
     public QuantumCircuitAppStartMenuGUI() {
-        super("Quantum Circuit Simulation UI");
+        super("Quantum Circuit Simulation Start Menu");
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -60,10 +60,6 @@ public class QuantumCircuitAppStartMenuGUI extends JFrame {
         } else if (startChoice.length() == 4) { // "|00>" or "|01>" or "|10>" or "|11>"
             new QuantumCircuitAppTwoQubitGUI(startChoice);
         }
-    }
-
-    public static void main(String[] args) {
-        new QuantumCircuitAppStartMenuGUI();
     }
 
 
