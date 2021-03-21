@@ -20,6 +20,9 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
 
     }
 
+    // REQUIRES: initialState is "|00>" or "|01>" or "|10>" or "|11>"
+    // MODIFIES: this
+    // EFFECTS: Initializes the Two Qubit Quantum circuit with the specified pure 2-qubit state.
     @Override
     protected void initializeCircuit(String initialState) {
         Complex zero = new Complex(0, 0);
@@ -40,6 +43,8 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates a combination box for adding one-qubit gates
     @Override
     protected void addChooseGatesBox() {
         Object[] twoQubitGates = getAllTwoQubitGates();
@@ -53,7 +58,7 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
         add(addChooseGatesBox);
     }
 
-
+    // EFFECTS: Produces Array of all possible two-qubit gates
     private Object[] getAllTwoQubitGates() {
         String[] oneQubitGateList = {"Pauli X", "Pauli Y", "Pauli Z", "S", "T", "Identity", "Hadamard"};
         List<String> allGates = new ArrayList();
@@ -68,6 +73,8 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
         return allGates.toArray();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds gate to list based on user input from combobox, and update statusLabel to indicate response.
     private void addGatesToGateList(String gates) {
         String addedGatesMessage;
         if (gates.equals("CNOT")) {
@@ -86,6 +93,7 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
         }
     }
 
+    // EFFECTS: Produces one-letter character corresponding to given input string.
     private String getGate(String gate) {
         if (gate.equals("Pauli X")) {
             return "X";
@@ -104,10 +112,13 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a text field for loading in a 2-qubit state and gates from a JSON file.
     @Override
     protected void addLoadTextField() {
         JTextField loadStateTextField = new JTextField("Load qubit state from _.json");
         loadStateTextField.addActionListener(new ActionListener() {
+            // EFFECTS: When press enter, (if exists) loads in 2-qubit state and gates from _.json where _ is textfield
             public void actionPerformed(ActionEvent e) {
                 String filename = (String) loadStateTextField.getText();
                 String abort = "Could not load qubit state from file.";

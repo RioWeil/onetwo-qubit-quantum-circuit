@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+// Represents a GUI for the Quantum Circuit Application
 public abstract class QuantumCircuitAppGUI extends JFrame {
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 700;
@@ -35,14 +36,20 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Initializes the Quantum circuit with the specified state.
     protected abstract void initializeCircuit(String initialState);
 
+    // MODIFIES: this
+    // EFFECTS: Adds labels to display application status and qubit state/measurement probabilities.
     private void addLabels() {
         addStatusLabel();
         addQubitStateLabel();
         addProbabilitiesLabel();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds combobox for adding gates, and buttons for removing/applying gates and making a measurement.
     private void addButtons() {
         addChooseGatesBox();
         addRemoveGateButton();
@@ -51,33 +58,47 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
         addMeasureButton();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds text fields for saving and loading the qubit(s) states.
     private void addSaveLoad() {
         addSaveTextField();
         addLoadTextField();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a label to display the current state of the application.
     public void addStatusLabel() {
         statusLabel = new JLabel("Welcome to the One Qubit Simulation!", (int) CENTER_ALIGNMENT);
         add(statusLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a label to display the current state of the qubit(s).
     public void addQubitStateLabel() {
         String initialQubitStateString = qubits.returnState();
         qubitStateLabel = new JLabel(initialQubitStateString);
         add(qubitStateLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a label to display the current measurement probabilities of the qubit(s).
     public void addProbabilitiesLabel() {
         String initialProbabilitiesString = qubits.returnProbabilities();
         probabilitiesLabel = new JLabel(initialProbabilitiesString);
         add(probabilitiesLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates a combination box to add quantum gates to the list.
     protected abstract void addChooseGatesBox();
 
+    // MODIFIES: this
+    // EFFECTS: Adds a button to remove the first quantum gate in the list.
     private void addRemoveGateButton() {
         JButton removeGateButton = new JButton("Remove first gate in gate list");
         removeGateButton.addActionListener(new ActionListener() {
+            // MODFIES: this
+            // EFFECTS: When button is clicked, remove first quantum gate from list.
             public void actionPerformed(ActionEvent e) {
                 String removedGateMessage;
                 removedGateMessage = qubits.removeGate();
@@ -87,9 +108,13 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
         add(removeGateButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a button to apply the first quantum gate in the list to the qubit(s).
     private void addApplyGateButton() {
         JButton applyGateButton = new JButton("Apply first gate in gate list to qubit(s)");
         applyGateButton.addActionListener(new ActionListener() {
+            // MODIFIES: this
+            // EFFECTS: When button is clicked, apply first quantum gate in list to qubit(s).
             public void actionPerformed(ActionEvent e) {
                 String appliedGateMessage;
                 String updatedQubitStateString;
@@ -105,9 +130,13 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
         add(applyGateButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a button to apply all quantum gates in the list to the qubit(s).
     private void addApplyAllGatesButton() {
         JButton applyAllGatesButton = new JButton("Apply all gates in list to qubit(s)");
         applyAllGatesButton.addActionListener(new ActionListener() {
+            // MODIFIES: this
+            // EFFECTS: When button is clicked, apply all quantum gates in list to qubit(s).
             public void actionPerformed(ActionEvent e) {
                 String appliedAllGatesMessage;
                 String updatedQubitStateString;
@@ -124,9 +153,13 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a button to measure the qubit(s).
     private void addMeasureButton() {
         JButton measureButton = new JButton("Measure the qubit(s)");
         measureButton.addActionListener(new ActionListener() {
+            // MODIFIES: this
+            // EFFECTS: When button is clicked, measure the qubit(s).
             public void actionPerformed(ActionEvent e) {
                 String measuredQubitMessage;
                 String updatedQubitStateString;
@@ -142,11 +175,14 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
         add(measureButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a text field for saving the qubit state and gates to a JSON file.
     private void addSaveTextField() {
         JTextField saveStateTextField = new JTextField("Save current qubit state as _.json");
         saveStateTextField.addActionListener(new ActionListener() {
+            // EFFECTS: When enter is pressed, saves current state and gates to _.json where _ is text in textfield.
             public void actionPerformed(ActionEvent e) {
-                String filename = (String) saveStateTextField.getText();
+                String filename = saveStateTextField.getText();
                 try {
                     JsonWriter writer = new JsonWriter(relPath + filename + extension);
                     writer.open();
@@ -161,6 +197,8 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
         add(saveStateTextField);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a text field for loading in a qubit state and gates from a JSON file.
     protected abstract void addLoadTextField();
 
 

@@ -417,6 +417,7 @@ public class QuantumCircuitAppConsole {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: Processes user input for loading a two-qubit state from a JSON file.
     private void twoQubitLoad() {
         String command;
@@ -425,6 +426,7 @@ public class QuantumCircuitAppConsole {
         twoQubitLoadCommand(command);
     }
 
+    // MODIFIES: this
     // EFFECTS: Processes user command for loading a two-qubit state from a JSON file.
     private void twoQubitLoadCommand(String filename) {
         String abort = " Aborting load procedure and returning to qubit control menu.";

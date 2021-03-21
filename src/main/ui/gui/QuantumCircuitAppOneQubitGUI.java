@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+// Represents the GUI for a one qubit quantum circuit
 public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
 
     // EFFECTS: Creates a new OneQubit Quantum Circuit GUI
@@ -18,7 +19,8 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
     }
 
     // REQUIRES: initialState is "|0>" or "|1>"
-    // EFFECTS: Initializes the One Qubit Quantum circuit with the specified original state
+    // MODIFIES: this
+    // EFFECTS: Initializes the One Qubit Quantum circuit with the specified pure 1-qubit state.
     @Override
     protected void initializeCircuit(String initialState) {
         if (initialState.equals("|0>")) {
@@ -28,12 +30,16 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates a combination box for adding one-qubit gates
     @Override
     protected void addChooseGatesBox() {
         final String[] oneQubitGates = {"Add _ gate to gate list...",
                 "Pauli X", "Pauli Y", "Pauli Z", "S", "T", "Identity", "Hadamard"};
         final JComboBox addChooseGatesBox = new JComboBox(oneQubitGates);
         addChooseGatesBox.addActionListener(new ActionListener() {
+            // MODIFIES: this
+            // EFFECTS: When option in combobox is clicked, save the clicked gate to the list.
             public void actionPerformed(ActionEvent e) {
                 String gate = (String) addChooseGatesBox.getSelectedItem();
                 addGateToGateList(gate);
@@ -43,6 +49,8 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: Adds gate to list based on user input from combobox, and update statusLabel to indicate response.
     private void addGateToGateList(String gate) {
         String addedGateMessage;
         if (gate.equals("Pauli X")) {
@@ -68,10 +76,13 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a text field for loading in a 1-qubit state and gates from a JSON file.
     @Override
     protected void addLoadTextField() {
         JTextField loadStateTextField = new JTextField("Load qubit state from _.json");
         loadStateTextField.addActionListener(new ActionListener() {
+            // EFFECTS: When press enter, (if exists) loads in 1-qubit state and gates from _.json where _ is textfield.
             public void actionPerformed(ActionEvent e) {
                 String filename = (String) loadStateTextField.getText();
                 String abort = "Could not load qubit state from file.";
