@@ -19,8 +19,6 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
     private GridLayout layout;
     final String relPath = "./data/";
     final String extension = ".json";
-    protected final String[] oneQubitGates = {"Add _ gate to gate list...",
-            "Pauli X", "Pauli Y", "Pauli Z", "S", "T", "Identity", "Hadamard"};
 
     // EFFECTS: Creates a new Quantum Circuit GUI
     public QuantumCircuitAppGUI(String initialState, String quantumCircuitType) {

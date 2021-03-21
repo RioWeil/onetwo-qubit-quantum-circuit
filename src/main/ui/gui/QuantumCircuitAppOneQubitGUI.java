@@ -19,6 +19,7 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
 
     // REQUIRES: initialState is "|0>" or "|1>"
     // EFFECTS: Initializes the One Qubit Quantum circuit with the specified original state
+    @Override
     protected void initializeCircuit(String initialState) {
         if (initialState.equals("|0>")) {
             qubits = new OneQubitQuantumCircuit(new Complex(1, 0), new Complex(0, 0));
@@ -27,7 +28,10 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
         }
     }
 
+    @Override
     protected void addChooseGatesBox() {
+        final String[] oneQubitGates = {"Add _ gate to gate list...",
+                "Pauli X", "Pauli Y", "Pauli Z", "S", "T", "Identity", "Hadamard"};
         final JComboBox addChooseGatesBox = new JComboBox(oneQubitGates);
         addChooseGatesBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -38,8 +42,9 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
         add(addChooseGatesBox);
     }
 
+
     private void addGateToGateList(String gate) {
-        String addedGateMessage = null;
+        String addedGateMessage;
         if (gate.equals("Pauli X")) {
             addedGateMessage = qubits.addGate("X");
         } else if (gate.equals("Pauli Y")) {
@@ -54,6 +59,8 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
             addedGateMessage = qubits.addGate("I");
         } else if (gate.equals("Hadamard")) {
             addedGateMessage = qubits.addGate("H");
+        } else {
+            addedGateMessage = null;
         }
         if (addedGateMessage != null) {
             statusLabel.setText(addedGateMessage);
@@ -61,6 +68,7 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
 
     }
 
+    @Override
     protected void addLoadTextField() {
         JTextField loadStateTextField = new JTextField("Load qubit state from _.json");
         loadStateTextField.addActionListener(new ActionListener() {
