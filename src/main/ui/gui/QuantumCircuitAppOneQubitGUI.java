@@ -97,6 +97,7 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
                     qubitStateLabel.setText(updatedQubitStateString);
                     String updatedProbabilitiesString = qubits.returnProbabilities();
                     probabilitiesLabel.setText(updatedProbabilitiesString);
+                    gatedrawer.setGates(qubits.getGateList());
                     gatedrawer.repaint();
                 } catch (IOException ex) {
                     statusLabel.setText("File could not be found." + abort);

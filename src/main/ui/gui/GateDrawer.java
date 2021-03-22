@@ -31,6 +31,12 @@ public class GateDrawer extends Canvas {
         this.width = width;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Set gatelist in gatedrawer manually
+    public void setGates(LinkedList<String> gateList) {
+        this.gatelist = gateList;
+    }
+
     // MODIFIES: g
     // EFFECTS: Paints the canvas with the quantum gates.
     @Override
