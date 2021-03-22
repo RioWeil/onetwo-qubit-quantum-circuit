@@ -52,7 +52,10 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
         addChooseGatesBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String gates = (String) addChooseGatesBox.getSelectedItem();
-                addGatesToGateList(gates);
+                if (gates != null) {
+                    addGatesToGateList(gates);
+                }
+                gatedrawer.repaint();
             }
         });
         add(addChooseGatesBox);
@@ -61,7 +64,7 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
     // EFFECTS: Produces Array of all possible two-qubit gates
     private Object[] getAllTwoQubitGates() {
         String[] oneQubitGateList = {"Pauli X", "Pauli Y", "Pauli Z", "S", "T", "Identity", "Hadamard"};
-        List<String> allGates = new ArrayList();
+        List<String> allGates = new ArrayList<String>();
         allGates.add("Add _ gates to gate list...");
         allGates.add("CNOT");
         for (String gate1: oneQubitGateList) {
@@ -95,20 +98,21 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
 
     // EFFECTS: Produces one-letter character corresponding to given input string.
     private String getGate(String gate) {
-        if (gate.equals("Pauli X")) {
-            return "X";
-        } else if (gate.equals("Pauli Y")) {
-            return "Y";
-        } else if (gate.equals("Pauli Z")) {
-            return "Z";
-        } else if (gate.equals("S")) {
-            return "S";
-        } else if (gate.equals("T")) {
-            return "T";
-        } else if (gate.equals("Identity")) {
-            return "I";
-        } else {
-            return "H";
+        switch (gate) {
+            case "Pauli X":
+                return "X";
+            case "Pauli Y":
+                return "Y";
+            case "Pauli Z":
+                return "Z";
+            case "S":
+                return "S";
+            case "T":
+                return "T";
+            case "Identity":
+                return "I";
+            default:
+                return "H";
         }
     }
 
@@ -120,7 +124,7 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
         loadStateTextField.addActionListener(new ActionListener() {
             // EFFECTS: When press enter, (if exists) loads in 2-qubit state and gates from _.json where _ is textfield
             public void actionPerformed(ActionEvent e) {
-                String filename = (String) loadStateTextField.getText();
+                String filename = loadStateTextField.getText();
                 String abort = "Could not load qubit state from file.";
                 try {
                     JsonReader reader = new JsonReader(relPath + filename + extension);
@@ -130,6 +134,7 @@ public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
                     qubitStateLabel.setText(updatedQubitStateString);
                     String updatedProbabilitiesString = qubits.returnProbabilities();
                     probabilitiesLabel.setText(updatedProbabilitiesString);
+                    gatedrawer.repaint();
                 } catch (IOException ex) {
                     statusLabel.setText("File could not be found." + abort);
                 } catch (WrongQubitNumberException ex) {

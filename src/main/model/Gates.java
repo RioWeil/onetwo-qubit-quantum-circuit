@@ -62,4 +62,9 @@ public class Gates {
         }
         return jsonArray;
     }
+
+    // EFFECTS: Returns complete list of gates
+    public LinkedList<String> getGateList() {
+        return gatelist;
+    }
 }

@@ -3,6 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 // Test class for Gates
@@ -93,5 +95,17 @@ public class GatesTest {
         assertEquals(1, gates.length());
         assertEquals("H", gates.getNextGate());
         assertTrue(gates.isEmpty());
+    }
+
+    @Test
+    public void testGetGateList() {
+        gates.addGate("H");
+        gates.addGate("X");
+        gates.addGate("Y");
+        LinkedList<String> test = new LinkedList<>();
+        test.add("H");
+        test.add("X");
+        test.add("Y");
+        assertEquals(test, gates.getGateList());
     }
 }

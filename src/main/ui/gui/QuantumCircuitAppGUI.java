@@ -17,7 +17,7 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
     protected JLabel statusLabel;
     protected JLabel qubitStateLabel;
     protected JLabel probabilitiesLabel;
-    private GridLayout layout;
+    protected GateDrawer gatedrawer;
     final String relPath = "./data/";
     final String extension = ".json";
 
@@ -26,10 +26,11 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
         super(quantumCircuitType);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        layout = new GridLayout(0,1);
+        GridLayout layout = new GridLayout(0,1);
         this.setLayout(layout);
         initializeCircuit(initialState);
         addLabels();
+        addGateDrawing();
         addButtons();
         addSaveLoad();
         pack();
@@ -46,6 +47,13 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
         addStatusLabel();
         addQubitStateLabel();
         addProbabilitiesLabel();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Adds a drawing of the quantum gates.
+    private void addGateDrawing() {
+        gatedrawer = new GateDrawer(qubits, WIDTH);
+        add(gatedrawer);
     }
 
     // MODIFIES: this
@@ -68,7 +76,7 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: Adds a label to display the current state of the application.
     public void addStatusLabel() {
-        statusLabel = new JLabel("Welcome to the One Qubit Simulation!", (int) CENTER_ALIGNMENT);
+        statusLabel = new JLabel("Welcome to the One Qubit Simulation!", SwingConstants.CENTER);
         add(statusLabel);
     }
 
@@ -76,7 +84,7 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
     // EFFECTS: Adds a label to display the current state of the qubit(s).
     public void addQubitStateLabel() {
         String initialQubitStateString = qubits.returnState();
-        qubitStateLabel = new JLabel(initialQubitStateString);
+        qubitStateLabel = new JLabel(initialQubitStateString, SwingConstants.CENTER);
         add(qubitStateLabel);
     }
 
@@ -84,7 +92,7 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
     // EFFECTS: Adds a label to display the current measurement probabilities of the qubit(s).
     public void addProbabilitiesLabel() {
         String initialProbabilitiesString = qubits.returnProbabilities();
-        probabilitiesLabel = new JLabel(initialProbabilitiesString);
+        probabilitiesLabel = new JLabel(initialProbabilitiesString, SwingConstants.CENTER);
         add(probabilitiesLabel);
     }
 
@@ -103,6 +111,7 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
                 String removedGateMessage;
                 removedGateMessage = qubits.removeGate();
                 statusLabel.setText(removedGateMessage);
+                gatedrawer.repaint();
             }
         });
         add(removeGateButton);
@@ -125,6 +134,7 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
                 qubitStateLabel.setText(updatedQubitStateString);
                 updatedProbabilitiesString = qubits.returnProbabilities();
                 probabilitiesLabel.setText(updatedProbabilitiesString);
+                gatedrawer.repaint();
             }
         });
         add(applyGateButton);
@@ -147,6 +157,7 @@ public abstract class QuantumCircuitAppGUI extends JFrame {
                 qubitStateLabel.setText(updatedQubitStateString);
                 updatedProbabilitiesString = qubits.returnProbabilities();
                 probabilitiesLabel.setText(updatedProbabilitiesString);
+                gatedrawer.repaint();
             }
         });
         add(applyAllGatesButton);

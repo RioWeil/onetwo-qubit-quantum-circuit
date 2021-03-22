@@ -42,7 +42,10 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
             // EFFECTS: When option in combobox is clicked, save the clicked gate to the list.
             public void actionPerformed(ActionEvent e) {
                 String gate = (String) addChooseGatesBox.getSelectedItem();
-                addGateToGateList(gate);
+                if (gate != null) {
+                    addGateToGateList(gate);
+                }
+                gatedrawer.repaint();
             }
         });
         add(addChooseGatesBox);
@@ -84,7 +87,7 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
         loadStateTextField.addActionListener(new ActionListener() {
             // EFFECTS: When press enter, (if exists) loads in 1-qubit state and gates from _.json where _ is textfield.
             public void actionPerformed(ActionEvent e) {
-                String filename = (String) loadStateTextField.getText();
+                String filename = loadStateTextField.getText();
                 String abort = "Could not load qubit state from file.";
                 try {
                     JsonReader reader = new JsonReader(relPath + filename + extension);
@@ -94,6 +97,7 @@ public class QuantumCircuitAppOneQubitGUI extends QuantumCircuitAppGUI {
                     qubitStateLabel.setText(updatedQubitStateString);
                     String updatedProbabilitiesString = qubits.returnProbabilities();
                     probabilitiesLabel.setText(updatedProbabilitiesString);
+                    gatedrawer.repaint();
                 } catch (IOException ex) {
                     statusLabel.setText("File could not be found." + abort);
                 } catch (WrongQubitNumberException ex) {

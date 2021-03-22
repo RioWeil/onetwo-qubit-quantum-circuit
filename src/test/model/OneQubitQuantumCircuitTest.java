@@ -2,7 +2,9 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -219,6 +221,20 @@ public class OneQubitQuantumCircuitTest {
             assertEquals("You measured the system to be in the |1> state!", qc2.makeMeasurement());
             assertEquals("The current state is (0.000 + 0.000i)|0> + (1.000 + 0.000i)|1>.", qc2.returnState());
         }
+    }
+
+    @Test
+    public void testGetGateList() {
+        qc1.addGate("X");
+        qc1.addGate("Y");
+        qc1.addGate("I");
+        qc1.addGate("H");
+        LinkedList<String> test = new LinkedList<>();
+        test.add("X");
+        test.add("Y");
+        test.add("I");
+        test.add("H");
+        assertEquals(test, qc1.getGateList());
     }
 
 

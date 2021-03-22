@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 // Represents a general quantum circuit.
@@ -86,5 +87,10 @@ public abstract class QuantumCircuit implements Writable {
 
     // EFFECTS: Produces a JSONArray containing amplitudes of qubit system eigenstates.
     protected abstract JSONArray amplitudesToJson();
+
+    // EFFECTS: Produces List of all gates currently in list.
+    public LinkedList<String> getGateList() {
+        return gates.getGateList();
+    }
 
 }

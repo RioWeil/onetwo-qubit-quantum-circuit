@@ -17,7 +17,7 @@ public class QuantumCircuitAppStartMenuGUI extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JLabel welcomeLabel = new JLabel("Welcome! Choose a circuit type and starting state.", (int) CENTER_ALIGNMENT);
+        JLabel welcomeLabel = new JLabel("Welcome! Choose a circuit type and starting state.", SwingConstants.CENTER);
         add(welcomeLabel, BorderLayout.NORTH);
 
         setQubitImage();
@@ -47,7 +47,9 @@ public class QuantumCircuitAppStartMenuGUI extends JFrame {
         qubitCombo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String startChoice = (String) qubitCombo.getSelectedItem();
-                startCircuit(startChoice);
+                if (startChoice != null) {
+                    startCircuit(startChoice);
+                }
             }
         });
         add(qubitCombo, BorderLayout.SOUTH);
