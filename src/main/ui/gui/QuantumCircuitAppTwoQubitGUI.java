@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents the GUI for a two qubit quantum circuit
 public class QuantumCircuitAppTwoQubitGUI extends QuantumCircuitAppGUI {
 
     // EFFECTS: Creates a new OneQubit Quantum Circuit GUI
