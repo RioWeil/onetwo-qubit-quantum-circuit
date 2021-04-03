@@ -31,3 +31,11 @@ Other type hierachies in the project include:
 - FourByOneVector and TwoByOneVector extend Vector
 - TwoQubit extends FourByOneVector, OneQubit extends TwoByOneVector
 - FourByFourMatrix and TwoByTwoMatrix extend Matrix
+
+## Phase 4: Task 3
+Refactoring that I would do if I had more time to work on my design:
+- Although it is no longer being used since the GUI was developed, it would be worth refactoring the Console ui to have a single QuantumCircuit field rather than two separate OneQubitQuantum Circuit and TwoQubitQuantumCircuit fields.
+- I think I could abstract out TwoQubit and OneQubit into a single Qubits class. 
+- Overall, for a larger scale implementation, it would be worthwhile to not create separate classes for quantum circuits with n numbers of qubits, as this leads to a lot of repeated code. Instead, it would be better to work with a list of qubits, and then have a quantum circuit that would work with a general number of qubits.
+- The above refactoring would result in abstraction in many areas in the code; e.g. no more separate concrete classes for vectors/matrices, no separate classes for the GUI of each type, etc. 
+  
