@@ -23,3 +23,11 @@ See *qc_overview.pdf* file.
   and measure the state.
 - As a user, I want to be able to save the current qubit state(s) and list of quantum gates for the 1/2 qubit circuits.
 - As a user, I want to be load in a qubit states and list of quantum gates from a file.
+
+## Phase 4: Task 2
+I chose to include a type hierarchy in my code.
+- OneQubitQuantumCircuit and TwoQubitQuantumCircuit both extend QuantumCircuit, with different functionality in the two subclasses.
+Other type hierachies in the project include:  
+- FourByOneVector and TwoByOneVector extend Vector
+- TwoQubit extends FourByOneVector, OneQubit extends TwoByOneVector
+- FourByFourMatrix and TwoByTwoMatrix extend Matrix
